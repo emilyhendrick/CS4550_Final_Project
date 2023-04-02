@@ -1,0 +1,22 @@
+.noPadding {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-down: 0px;
+    padding: 10px;
+    Margin: -10px;
+}
+
+#upper {
+    background-color: black;
+    height: 100px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+}
+
+.paddingUp {
+    padding: 160px;
+}
+
+.width-long {
+width: 100px;
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "_id": 123,
+    "userName": "reviewer12",
+    "handle": "reviewer12",
+    "avatarIcon": "user.jpg"
+  },
+  {
+    "_id": 234,
+    "userName": "reviewer10",
+    "handle": "reviewer10",
+    "avatarIcon": "user.jpg"
+  },
+  {
+    "_id": 345,
+    "userName": "reviewer1",
+    "handle": "reviewer1",
+    "avatarIcon": "user.jpg"
+  }
+]

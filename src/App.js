@@ -6,12 +6,15 @@ import BusinessProfileComponent
   from "./profile/businessProfile/businessProfile";
 import PersonalProfileComponent
   from "./profile/reviewerProfile/personal-profile";
+import LoginComponent from "./login/index";
+import SignUpComponent from "./signup/index";
+import RestaurantComponent from "./restaurant/index";
 
 function App() {
   return (
       <div className="row mt-2">
         <div className="col-10 col-md-10 col-sm-7 col-xs-6" style={{"position": "relative"}}>
-          <PersonalProfileComponent />
+          <RestaurantComponent />
         </div>
       </div>
   );
