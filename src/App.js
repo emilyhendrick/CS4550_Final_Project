@@ -1,24 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import ProfileComponent from './profile/reviewerProfile/personal-profile'
+import NavigationSidebar from "./navigationSidebar";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import BusinessProfileComponent
+  from "./profile/businessProfile/businessProfile";
+import PersonalProfileComponent
+  from "./profile/reviewerProfile/personal-profile";
+import LoginComponent from "./login/index";
+import SignUpComponent from "./signup/index";
+import RestaurantComponent from "./restaurant/index";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="row mt-2">
+        <div className="col-10 col-md-10 col-sm-7 col-xs-6" style={{"position": "relative"}}>
+          <RestaurantComponent />
+        </div>
+      </div>
   );
 }
 
