@@ -9,15 +9,30 @@ import PersonalProfileComponent
 import LoginComponent from "./login/index";
 import SignUpComponent from "./signup/index";
 import RestaurantComponent from "./restaurant/index";
+import {BrowserRouter} from "react-router-dom";
+import {Routes, Route} from "react-router";
+import Home from "./home";
+import ResultSummaryList from "./home/results";
+
 
 function App() {
-  return (
-      <div className="row mt-2">
-        <div className="col-10 col-md-10 col-sm-7 col-xs-6" style={{"position": "relative"}}>
-          <RestaurantComponent />
-        </div>
-      </div>
-  );
+    return (
+        <BrowserRouter>
+            <div className="container">
+                <Routes>
+                    <Route index
+                           element={<Home/>}/>
+                    <Route path="/restaurant"
+                           element={<RestaurantComponent/>}/>
+                    <Route path="/result"
+                           element={<ResultSummaryList/>}/>
+                </Routes>
+            </div>
+        </BrowserRouter>
+
+    );
 }
+
+
 
 export default App;
