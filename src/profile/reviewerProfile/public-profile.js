@@ -6,7 +6,7 @@ const PublicProfileComponent = (
       userProfile = {
         "name": "Test User",
         "profilePic": "tesla.png",
-        "handle": "test101011",
+        "username": "test101011",
         "bio": "hello! this is my bio",
       }
     }
@@ -19,7 +19,7 @@ const PublicProfileComponent = (
           <img src={userProfile.profilePic} className="rounded-circle mb-2"
                width="64px" height="64px"/>
           <h3 className={"m-0 fw-bold"}>{userProfile.name}</h3>
-          <p className={"m-0"}>@{userProfile.handle}</p>
+          <p className={"m-0"}>@{userProfile.username}</p>
         </div>
         <div className={"mb-3"}>{userProfile.bio}</div>
         <div>

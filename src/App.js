@@ -9,13 +9,33 @@ import PersonalProfileComponent
 import LoginComponent from "./login/index";
 import SignUpComponent from "./signup/index";
 import RestaurantComponent from "./restaurant/index";
+import {Provider} from "react-redux";
+import store from "./reducers/store";
+import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
+import CurrentUserContext from "./reducers/current-user-context";
 
 function App() {
   return (
       <div className="row mt-2">
-        <div className="col-10 col-md-10 col-sm-7 col-xs-6" style={{"position": "relative"}}>
-          <RestaurantComponent />
-        </div>
+        <Provider store={store}>
+          <CurrentUserContext>
+            <BrowserRouter>
+              <div className={"list-group"}>
+                <Link to="/" className={"list-group-item"}>Home</Link>
+                <Link to="register">Register</Link>
+                <Link to="profile">Profile</Link>
+                // Home page
+                // Profile vs login / sign up
+              </div>
+              <Routes>
+                <Route path="/" element={<RestaurantComponent />} />
+                <Route path="/register" element={<LoginComponent />} />
+                <Route path="/profile" element={<PersonalProfileComponent />} />
+                <Route path="/profile/:username" element={<PersonalProfileComponent />} />
+              </Routes>
+            </BrowserRouter>
+          </CurrentUserContext>
+        </Provider>
       </div>
   );
 }
