@@ -23,11 +23,14 @@ function App() {
               <Link to="/">Home</Link>
               <Link to="register">Register</Link>
               <Link to="profile">Profile</Link>
+              <Link to="signup">SignUp</Link>
               <Routes>
                 <Route path="/" element={<RestaurantComponent />} />
                 <Route path="/register" element={<LoginComponent />} />
                 <Route path="/profile" element={<PersonalProfileComponent />} />
                 <Route path="/profile/:username" element={<ProfileComponent />} />
+                <Route path="/signup" element={<SignUpComponent />} />
+
               </Routes>
             </BrowserRouter>
           </CurrentUserContext>

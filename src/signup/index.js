@@ -5,7 +5,7 @@ const SignUpComponent = () => {
 return(
 
 <>
-<form action="/action_page.php" >
+<form >
   <div className="container">
     <h1>Sign Up</h1>
     <p>Please fill in this form to create an account.</p>
