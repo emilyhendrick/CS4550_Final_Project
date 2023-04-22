@@ -1,5 +1,5 @@
 import axios from "axios";
-const USERS_REST_API_URL = "http://localhost:4000/api";
+const USERS_REST_API_URL = "http://localhost:4000/api/users";
 
 const api = axios.create({
   withCredentials: true,
@@ -46,11 +46,11 @@ export const register = async (user) => {
 };
 
 export const profile = async () => {
-  const response = await api.get(`${USERS_REST_API_URL}/users`);
+  const response = await api.get(`${USERS_REST_API_URL}/profile`);
   return response.data;
 };
 
 export const findUserByUsername = async (username) => {
-  const response = await api.get(`${USERS_REST_API_URL}/users/username/${username}`);
+  const response = await api.get(`${USERS_REST_API_URL}/username/${username}`);
   return response.data;
 };

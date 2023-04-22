@@ -7,10 +7,10 @@ import { useDispatch } from "react-redux";
 import { loginThunk } from "../services/user-thunks";
 function LoginComponent() {
   const [user, setUser] = useState({
-    username: "alice",
-    password: "alice",
-    firstName: "Alice",
-    lastName: "Wonderland",
+    username: "testUser",
+    password: "password",
+    firstName: "Test",
+    lastName: "User",
   });
  const navigate = useNavigate();
  const dispatch = useDispatch();

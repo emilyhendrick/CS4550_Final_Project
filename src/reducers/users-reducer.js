@@ -16,6 +16,7 @@ const usersSlice = createSlice({
   extraReducers: {
     [loginThunk.fulfilled]: (state, action) => {
       state.currentUser = action.payload;
+      console.log(state.currentUser);
     },
     [logoutThunk.fulfilled]: (state, action) => {
       state.currentUser = null;
@@ -25,6 +26,7 @@ const usersSlice = createSlice({
     },
     [profileThunk.fulfilled]: (state, action) => {
       state.currentUser = action.payload;
+      console.log(state.currentUser);
     },
   },
 });
