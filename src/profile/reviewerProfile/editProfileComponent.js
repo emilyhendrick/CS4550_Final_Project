@@ -14,6 +14,9 @@ const EditProfileComponent = (
 ) => {
   return(
       <div>
+        <div>
+
+        </div>
         <div className={"row justify-content-between align-items-center"}>
           <div className={"col-6 pb-2 pt-2"}><h3 className={"m-0"}>Account Details</h3></div>
           <div className={"col-6 text-end"}>

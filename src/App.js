@@ -20,17 +20,21 @@ function App() {
         <Provider store={store}>
           <CurrentUserContext>
             <BrowserRouter>
-              <Link to="/">Home</Link>
-              <Link to="register">Register</Link>
-              <Link to="profile">Profile</Link>
-              <Link to="signup">SignUp</Link>
+
+              <div className={"list-group"}>
+                <Link to="/" className={"list-group-item"}>Home</Link>
+                <Link to="register">Register</Link>
+                <Link to="profile">Profile</Link>
+                // Home page
+                // Profile vs login / sign up
+              </div>
+
               <Routes>
                 <Route path="/" element={<RestaurantComponent />} />
                 <Route path="/register" element={<LoginComponent />} />
                 <Route path="/profile" element={<PersonalProfileComponent />} />
-                <Route path="/profile/:username" element={<ProfileComponent />} />
-                <Route path="/signup" element={<SignUpComponent />} />
 
+                <Route path="/profile/:username" element={<PersonalProfileComponent />} />
               </Routes>
             </BrowserRouter>
           </CurrentUserContext>
