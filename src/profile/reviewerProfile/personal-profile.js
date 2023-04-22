@@ -8,9 +8,21 @@ const PersonalProfileComponent = () => {
   const {username} = useParams();
   const {currentUser} = useSelector((state) => state.users);
   const [profile, setProfile] = useState({});
-  const [reviews, setReviews] = useState([]);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const searchTerm = profile.username;
+  const [searchReviews, setSearchReviews] = useState(searchTerm);
+  const [searchResults, setSearchResults] = useState([]);
+  const searchForReviews = async () => {
+    // const results = await fullTextSearch(searchReviews);
+    // setSearchResults(results);
+  };
+  useEffect(() => {
+    if (searchTerm) {
+      setSearchReviews(searchTerm);
+      searchForReviews();
+    }
+  }, [searchTerm]);
   const getProfile = async () => {
     const action = await dispatch(profileThunk());
     console.log(action);
@@ -54,7 +66,7 @@ const PersonalProfileComponent = () => {
                    style={{border: "1px solid LightGrey", borderRadius: 5}}>
                 <div className={"m-2"}>
                   <p className={"fw-bold"}>Basic Info</p>
-                  {profile && (
+                  {(currentUser.userRole === 'Personal') && (
                       <div>
                         <label>Profile Picture</label>
                         {currentUser && (
@@ -123,6 +135,56 @@ const PersonalProfileComponent = () => {
                         )}
                       </div>
                   )}
+                  {(currentUser.userRole === 'Business') && (
+                      <div>
+                        <label>Profile Picture</label>
+                        <img src={profile.profilePic}
+                             className="rounded-circle mb-3 me-2"
+                             width="64px" height="64px"
+                             alt={"profile picture"}/>
+                        <input
+                            type="file"
+                            className="form-control"
+                            onChange={(e) => {
+                              setProfile(
+                                  {
+                                    ...profile,
+                                    profilePic: e.target.value
+                                  })
+                              userService.updateUser(profile);
+                            }
+                            }
+                        />
+                        <br/>
+                        <label>Business Name</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={profile.businessName}
+                            onChange={(e) => {
+                              setProfile(
+                                  {...profile, businessName: e.target.value});
+                              userService.updateUser(profile);
+                            }
+                            }
+                        />
+                        <label>Business Address</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={profile.businessAddress}
+                            onChange={(e) => {
+                              setProfile(
+                                  {
+                                    ...profile,
+                                    businessAddress: e.target.value
+                                  });
+                              userService.updateUser(profile);
+                            }
+                            }
+                        />
+                      </div>
+                  )}
                 </div>
               </div>
               <div style={{border: "1px solid LightGrey", borderRadius: 5}}>
@@ -178,14 +240,32 @@ const PersonalProfileComponent = () => {
             </div>)}
         {username && (
             <div>
-              <img src={profile.profilePic}
-                   className="rounded-circle mb-3 me-2"
-                   width="64px" height="64px"
-                   alt={"profile picture"}/>
-              <h2>{profile.firstName} {profile.lastName}</h2>
-              <p>@{profile.username}</p>
-              <hr/>
-              <p>{profile.firstName} {profile.lastName}'s Reviews</p>
+              {(profile.userRole === 'Personal') && (
+                  <div>
+                    <img src={profile.profilePic}
+                         className="rounded-circle mb-3 me-2"
+                         width="64px" height="64px"
+                         alt={"profile picture"}/>
+                    <h2>{profile.firstName} {profile.lastName}</h2>
+                    <p>@{profile.username}</p>
+                    <hr/>
+                    <p>{profile.firstName} {profile.lastName}'s Reviews</p>
+
+                  </div>
+              )
+              }
+              {(profile.userRole === 'Business') && (
+                  <div>
+                    <img src={profile.profilePic}
+                         className="rounded-circle mb-3 me-2"
+                         width="64px" height="64px"
+                         alt={"profile picture"}/>
+                    <h2>{profile.businessName}</h2>
+                    <p>{profile.businessAddress}</p>
+                    <hr/>
+                    <p>Reviews of {profile.businessName}</p>
+                  </div>
+              )}
             </div>
         )}
       </div>

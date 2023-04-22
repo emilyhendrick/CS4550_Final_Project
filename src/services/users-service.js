@@ -54,3 +54,11 @@ export const findUserByUsername = async (username) => {
   const response = await api.get(`${USERS_REST_API_URL}/username/${username}`);
   return response.data;
 };
+
+export const fullTextSearch = async (query) => {
+  const response = await axios.get(
+      `${USERS_REST_API_URL}/search/verbose?&query=${query}`
+  );
+  const json = await response.data;
+  return json.search.data.albums;
+};
