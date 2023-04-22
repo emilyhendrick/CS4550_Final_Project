@@ -20,6 +20,7 @@ function App() {
         <Provider store={store}>
           <CurrentUserContext>
             <BrowserRouter>
+
               <div className={"list-group"}>
                 <Link to="/" className={"list-group-item"}>Home</Link>
                 <Link to="register">Register</Link>
@@ -27,10 +28,12 @@ function App() {
                 // Home page
                 // Profile vs login / sign up
               </div>
+
               <Routes>
                 <Route path="/" element={<RestaurantComponent />} />
                 <Route path="/register" element={<LoginComponent />} />
                 <Route path="/profile" element={<PersonalProfileComponent />} />
+
                 <Route path="/profile/:username" element={<PersonalProfileComponent />} />
               </Routes>
             </BrowserRouter>
