@@ -25,15 +25,14 @@ function App() {
                 <Link to="/" className={"list-group-item"}>Home</Link>
                 <Link to="register">Register</Link>
                 <Link to="profile">Profile</Link>
-                // Home page
-                // Profile vs login / sign up
+                <Link to="login">Login</Link>
               </div>
 
               <Routes>
                 <Route path="/" element={<RestaurantComponent />} />
-                <Route path="/register" element={<LoginComponent />} />
+                <Route path="/register" element={<SignUpComponent />} />
                 <Route path="/profile" element={<PersonalProfileComponent />} />
-
+                <Route path="/login" element={<LoginComponent />} />
                 <Route path="/profile/:username" element={<PersonalProfileComponent />} />
               </Routes>
             </BrowserRouter>
