@@ -17,7 +17,7 @@ function LoginComponent() {
  const handleLogin = async () => {
  // try {
     await dispatch(loginThunk(user));
-    navigate("/profile");
+    navigate("/");
  // } catch (e) {
   //  alert(e);
  // }

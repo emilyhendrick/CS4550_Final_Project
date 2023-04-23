@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import * as userService from "../../services/users-service";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk, profileThunk} from "../../services/user-thunks";
+import {findReviewsByUsername} from "../../services/users-service";
 
 const PersonalProfileComponent = () => {
   const {username} = useParams();
@@ -11,18 +12,17 @@ const PersonalProfileComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const searchTerm = profile.username;
-  const [searchReviews, setSearchReviews] = useState(searchTerm);
   const [searchResults, setSearchResults] = useState([]);
   const searchForReviews = async () => {
-    // const results = await fullTextSearch(searchReviews);
-    // setSearchResults(results);
+    const results = await findReviewsByUsername(searchTerm);
+    setSearchResults(results);
+    console.log(searchResults);
   };
   useEffect(() => {
     if (searchTerm) {
-      setSearchReviews(searchTerm);
       searchForReviews();
     }
-  }, [searchTerm]);
+  }, [searchTerm, searchResults]);
   const getProfile = async () => {
     const action = await dispatch(profileThunk());
     console.log(action);
@@ -137,7 +137,7 @@ const PersonalProfileComponent = () => {
                   )}
                   {(currentUser.userRole === 'Business') && (
                       <div>
-                        <label>Profile Picture</label>
+                        <label>Profile Picture</label> <br/>
                         <img src={profile.profilePic}
                              className="rounded-circle mb-3 me-2"
                              width="64px" height="64px"
@@ -264,6 +264,15 @@ const PersonalProfileComponent = () => {
                     <p>{profile.businessAddress}</p>
                     <hr/>
                     <p>Reviews of {profile.businessName}</p>
+                    {searchResults.map((result) => {
+                      return (
+                          <td>
+                            <Link to={`/napster/album/${result.id}`}>
+                              <h2>{result.reviewer}</h2>
+                            </Link>
+                          </td>
+                      );
+                    })}
                   </div>
               )}
             </div>

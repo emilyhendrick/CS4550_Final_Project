@@ -1,5 +1,7 @@
 import axios from "axios";
 const USERS_REST_API_URL = "http://localhost:4000/api/users";
+const REVIEWS_REST_API_URL = "http://localhost:4000/api/reviews";
+
 
 const api = axios.create({
   withCredentials: true,
@@ -55,10 +57,11 @@ export const findUserByUsername = async (username) => {
   return response.data;
 };
 
-export const fullTextSearch = async (query) => {
+export const findReviewsByUsername = async (query) => {
   const response = await axios.get(
-      `${USERS_REST_API_URL}/search/verbose?&query=${query}`
+      `${REVIEWS_REST_API_URL}/username/${query}`
   );
-  const json = await response.data;
-  return json.search.data.albums;
+  console.log("query: " + query)
+  console.log(`${REVIEWS_REST_API_URL}/username/${query}`);
+  return response.data;
 };
