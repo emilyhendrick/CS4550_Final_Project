@@ -1,10 +1,14 @@
 import './App.css';
 import Labs from "./labs";
 // import HelloWorld from "./labs/a6/hello-world";
-import Tuiter from "./tuiter";
+import HomeAnon from "./homeanon";
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
-import Assignment7 from "./labs/a7";
+// import Assignment7 from "./labs/a7";
+// import RestaurantComponent from "./restaurant";
+import Restaurant from "./restaurant-2";
+import HomePersonal from "./homepersonal";
+import HomeBusiness from "./homebusiness";
 
 
 
@@ -15,11 +19,13 @@ function App() {
         <div className="container">
             <Routes>
                 <Route index
-                       element={<Labs/>}/>
-                <Route path="/a7"
-                       element={<Assignment7/>}/>
-                <Route path="/tuiter"
-                       element={<Tuiter/>}/>
+                       element={<HomeAnon/>}/>
+                <Route path="/homepersonal"
+                       element={<HomePersonal/>}/>
+                <Route path="/homebusiness"
+                       element={<HomeBusiness/>}/>
+                <Route path="/restaurant"
+                       element={<Restaurant/>}/>
             </Routes>
         </div>
       </BrowserRouter>
