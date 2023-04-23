@@ -15,12 +15,12 @@ function LoginComponent() {
  const navigate = useNavigate();
  const dispatch = useDispatch();
  const handleLogin = async () => {
- // try {
+  try {
     await dispatch(loginThunk(user));
-    navigate("/");
- // } catch (e) {
-  //  alert(e);
- // }
+    navigate("/profile");
+  } catch (e) {
+    alert(e);
+  }
  };
 return(
 
