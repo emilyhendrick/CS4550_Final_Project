@@ -6,6 +6,7 @@ import {logoutThunk, profileThunk} from "../../services/user-thunks";
 import {findReviewsByUsername} from "../../services/users-service";
 import ReviewItem from "../../restaurant/review-item";
 import ProfileReviewItem from "./profile-review-item";
+import LoginComponent from "../../login";
 
 const PersonalProfileComponent = () => {
   const {username} = useParams();
@@ -52,10 +53,6 @@ const PersonalProfileComponent = () => {
       getProfile();
     }
   }, []);
-  console.log(username);
-  console.log(currentUser);
-  console.log(profile);
-  // console.log(profile.username);
 
   return (
       <div className={"row"}>
@@ -293,6 +290,7 @@ const PersonalProfileComponent = () => {
               )}
             </div>
         )}
+        {!currentUser && (<LoginComponent/>)}
       </div>
   );
 };

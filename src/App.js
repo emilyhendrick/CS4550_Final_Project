@@ -33,7 +33,7 @@ function App() {
                 </div>
                 <div className={"col ms-2 me-2"} style={{"position": "relative"}}>
                   <Routes>
-                    <Route path="/" element={<RestaurantComponent/>}/>
+                    <Route path="/" element={<LoginComponent/>}/>
                     <Route path="/restaurant/:username" element={<RestaurantComponent/>}/>
                     <Route path="/register" element={<SignUpComponent/>}/>
                     <Route path="/profile"

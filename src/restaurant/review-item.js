@@ -5,57 +5,108 @@ import './review.css';
 import ReviewStat from "./review-stats";
 
 import {deleteReview, createReview}
- from "./review-reducer";
-
+  from "./review-reducer";
+import {Link} from "react-router-dom";
 
 const ReviewItem = (
- {
-   review = {
-   "_id": 234,
-   "topic": "Space",
-   "userName": "SpaceX",
-    "title": "100s of SpaceX Starships land on Mars after a 6 month journey. 1000s of Martian colonists being building Mars Base 1",
-    "time": "2h",
-    "image": "space.png",
-    "liked": true,
-    "replies": 123,
-    "retuits": 432,
-    "likes": 2345,
-    "handle": "@spacex",
-    "tuit": "You want to wake up in the morning and think the future is going to be great - and that’s what being a spacefaring civilization is all about. It’s about believing in the future and thinking that the future will be better than the past. And I can’t think of anything more exciting than going out there and being among the stars"
+    {
+      review = {
+        reviewer: {type: String, required: true},
+        reviewId: {type: String, required: true, unique: true},
+        review: {type: String, required: true},
+        rating:   {type: Number},
+        createdOn: {type: Date, default: Date.now},
+        profilePic: {type: String},
+        restaurantName: {type: String, required: true}
+      }
+    }) => {
 
-   }
- }) => {
+  const dispatch = useDispatch();
+  const deleteReviewHandler = (id) => {
+    dispatch(deleteReview(id));
+  }
 
- const dispatch = useDispatch();
- const deleteReviewHandler = (id) => {
-   dispatch(deleteReview(id));
- }
+  const reviewStars = () => {
+    if (review.rating.valueOf() === 1) {
+      return (
+          <div>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+          </div>
+      );
+    } else if (review.rating.valueOf() === 2) {
+      return (
+          <div>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+          </div>
+      );
+    } else if (review.rating.valueOf() === 3) {
+      return (
+          <div>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+          </div>
+      );
+    } else if (review.rating.valueOf() === 4) {
+      return (
+          <div>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+          </div>
+      );
+    } else if (review.rating.valueOf() === 5) {
+      return (
+          <div>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+          </div>
+      );
+    }
+  }
 
-return(
- <li className="list-group-item">
-   <div className="row">
-     <div className="col-auto">
-       <img width={50}
-            className="float-end rounded-circle"
-            src={`/images/${review.image}`}/>
-     </div>
-
-     <i className="col-1">{review.topic}</i>
-     <i className="col-1 bi bi-patch-check-fill"></i>
-     <i className="col-1">@{review.userName}</i>
-     <i className="col-2">{review.time}</i>
-     <i className="col-1 noPadding bi bi-star-fill"></i>
-     <i className="col-1 noPadding bi bi-star-fill"></i>
-     <i className="col-1 noPadding bi bi-star-fill"></i>
-     <i className="col-1 noPadding bi bi-star-half"></i>
-     <i className="col-1 noPadding bi bi-star"></i>
-     <i className="col-1">4.5/5 </i>
+  return (
+      <div className="list-group-item">
+        <div className="list-group-item mb-2"
+             style={{border: "1px solid LightGrey", borderRadius: 5}}>
+          <div className={"m-3"}>
+            <div className="d-inline-block justify-content-center">
+              <div className={"d-inline-block"}>
+                <img src={review.profilePic}
+                     className="rounded-circle mb-3 me-2"
+                     width="64px" height="64px"
+                     style={{width: "64px", height: "64px" }}
+                     alt={"profile picture"}/>
+              </div>
+              <div className={"d-inline-block"}>
+                <Link className={"pb-0 mb-0"}
+                      to={`/profile/${review.reviewer}`} style={{
+                  color: "dodgerblue",
+                  textDecoration: "none"
+                }}><strong>@{review.reviewer}</strong></Link>
+                <p className="pb-0 mb-2">{review.createdOn}</p>
+              </div>
+            </div>
+            {reviewStars()}
+            <p className={"pb-0 mt-2"}>{review.review}</p>
+          </div>
+        </div>
       </div>
-           <i className="col-auto">{review.tuit}</i>
-              <ReviewStat
-              key={review._id} review={review}/>
-        </li>
- )
+  )
 }
 export default ReviewItem;
