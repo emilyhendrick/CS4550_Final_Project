@@ -51,9 +51,6 @@ return(
 <input type="radio" value="Business"
       name="radio-role" id="radio-business" onChange={(e) => setUser({ ...user, userRole: e.target.value })} required/>
 <label for="radio-business">Business</label><br/>
-<input type="radio" value="Admin"
-      name="radio-role" id="radio-admin" onChange={(e) => setUser({ ...user, userRole: e.target.value })} required/>
-<label for="radio-admin">Admin</label><br/>
 
 <br/>
 
