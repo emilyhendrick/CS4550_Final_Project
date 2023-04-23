@@ -266,11 +266,9 @@ const PersonalProfileComponent = () => {
                     <p>Reviews of {profile.businessName}</p>
                     {searchResults.map((result) => {
                       return (
-                          <td>
-                            <Link to={`/napster/album/${result.id}`}>
+                          <div>
                               <h2>{result.reviewer}</h2>
-                            </Link>
-                          </td>
+                          </div>
                       );
                     })}
                   </div>
