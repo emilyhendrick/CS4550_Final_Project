@@ -4,6 +4,8 @@ import * as userService from "../../services/users-service";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk, profileThunk} from "../../services/user-thunks";
 import {findReviewsByUsername} from "../../services/users-service";
+import ReviewItem from "../../restaurant/review-item";
+import ProfileReviewItem from "./profile-review-item";
 
 const PersonalProfileComponent = () => {
   const {username} = useParams();
@@ -23,6 +25,7 @@ const PersonalProfileComponent = () => {
       searchForReviews();
     }
   }, [searchTerm, searchResults]);
+
   const getProfile = async () => {
     const action = await dispatch(profileThunk());
     console.log(action);
@@ -250,7 +253,9 @@ const PersonalProfileComponent = () => {
                     <p>@{profile.username}</p>
                     <hr/>
                     <p>{profile.firstName} {profile.lastName}'s Reviews</p>
-
+                    {searchResults.map(result => (
+                        <ProfileReviewItem key={result._id} review={result}/>
+                    ))}
                   </div>
               )
               }
@@ -264,13 +269,26 @@ const PersonalProfileComponent = () => {
                     <p>{profile.businessAddress}</p>
                     <hr/>
                     <p>Reviews of {profile.businessName}</p>
-                    {searchResults.map((result) => {
-                      return (
-                          <div>
-                              <h2>{result.reviewer}</h2>
-                          </div>
-                      );
-                    })}
+                    {searchResults.map((result) => (
+                              <h2>{result.title}</h2>
+                      ))}
+                    {() => (console.log(searchResults))}
+                    <div className="table-responsive">
+                      <table className="table">
+                        <tbody>
+                        <tr>
+                          {searchResults.map((result) => {
+                            console.log(result);
+                            return (
+                                <td>
+                                    <h2>{result.title}</h2>
+                                </td>
+                            );
+                          })}
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
               )}
             </div>
