@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import WhatsHappening from "./whats-happening";
 
-import {Link}
+import {Link, useNavigate, useParams}
   from "react-router-dom";
 import NavigationSidebar
   from "../navigationSidebar";
@@ -14,11 +14,38 @@ import reviewReducer from "./review-reducer";
 import {configureStore}
   from '@reduxjs/toolkit';
 import {Provider} from "react-redux";
+import {fullTextSearch} from "../services/yelp-service";
 
 const store = configureStore(
     {reducer: {reviews: reviewReducer}});
 
 const RestaurantComponent = () => {
+  const { searchTerm } = "starbucks";
+  const navigate = useNavigate();
+  const [search, setSearch] = useState(searchTerm);
+  const [results, setResults] = useState([]);
+  const searchNapster = async () => {
+    try {
+      const results = await fullTextSearch("starbucks");
+      setResults(results);
+      console.log(results);
+      navigate(`/`);
+    } catch (e) {
+      console.log(e);
+    }
+
+  };
+  useEffect(() => {
+    try {
+      setSearch(searchTerm);
+      searchNapster();
+    } catch (e) {
+      console.log(e.response.data);
+    }
+
+
+  }, [searchTerm]);
+
   return (
       <Provider store={store}>
         <div>
