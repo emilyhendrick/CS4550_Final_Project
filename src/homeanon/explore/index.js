@@ -1,22 +1,30 @@
 import React from "react";
 import PostSummaryList from "../post-summary-list";
 import WhoToFollowList from "../who-to-follow-list";
+// import SearchBar from "../../yelp-searchbar/searchbar";
+// import ResultsList from "../../yelp-searchbar/results-list";
+import YelpRestaurantDetails from "../../yelp/yelp-restaurant-details";
+import YelpSearchScreen from "../../yelp/yelp-search";
+import {searchRestaurants} from "../../yelp/yelp-service";
 import "./index.css";
 const ExploreComponent = () => {
     return(
         <>
             <div className="row">
-                <div className="col-9 position-relative">
-                    <input placeholder="Search Restaurant"
-                           className="form-control rounded-pill ps-5"/>
-                    <i className="bi bi-search position-absolute
-                       wd-nudge-up"></i>
-                </div>
-                <div className="col-3">
+                {/*<div className="col-9">*/}
+                    {/*<input placeholder="Search Restaurant"*/}
+                    {/*       className="form-control rounded-pill ps-5"/>*/}
+                    {/*<i className="bi bi-search position-absolute*/}
+                    {/*   wd-nudge-up"></i>*/}
+                    {/*<YelpSearchScreen/>*/}
+                {/*</div>*/}
+                <div className="col-12" align="right">
                     <button type="submit" className="btn btn-primary">Log in</button> &thinsp;
                     <button type="submit" className="btn btn-danger">Sign up</button>
                 </div>
             </div>
+            <YelpSearchScreen/>
+            <YelpRestaurantDetails/>
             <h3 align="center">Categories</h3>
             <WhoToFollowList/>
             <br/>
@@ -27,6 +35,10 @@ const ExploreComponent = () => {
                     Explore restaurants in your area</h1>
             </div>
             <br/>
+            {/*<SearchBar/>*/}
+            {/*<ResultsList/>*/}
+            {/*<YelpSearchScreen/>*/}
+
             <h3 align="center">Recent Reviews</h3>
             <PostSummaryList/>
         </>

@@ -9,8 +9,9 @@ import {Routes, Route} from "react-router";
 import Restaurant from "./restaurant-2";
 import HomePersonal from "./homepersonal";
 import HomeBusiness from "./homebusiness";
-
-
+// import Yelp from "./yelp";
+import YelpSearchScreen from "./yelp/yelp-search";
+import YelpRestaurantDetails from "./yelp/yelp-restaurant-details";
 
 
 function App() {
@@ -22,6 +23,17 @@ function App() {
                        element={<HomeAnon/>}/>
                 <Route path="/homepersonal"
                        element={<HomePersonal/>}/>
+                {/*<Route path="/yelp/search/*"*/}
+                {/*       element={<Yelp/>}/> // render a home component that will get the results*/}
+                <Route
+                    path="/yelp/restaurant/:id"
+                    element={<YelpRestaurantDetails/>}
+                />
+                <Route path="/yelp/search" element={<YelpSearchScreen/>} />
+                <Route
+                    path="/yelp/search/:searchTerm"
+                    element={<YelpSearchScreen/>}
+                />
                 <Route path="/homebusiness"
                        element={<HomeBusiness/>}/>
                 <Route path="/restaurant"
