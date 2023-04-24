@@ -2,13 +2,20 @@ import React, {useState} from "react";
 
 import {createReview} from "./review-reducer";
 import {useDispatch} from "react-redux";
+import {Link, useNavigate, useParams}
+  from "react-router-dom";
 
 const WhatsHappening = () => {
+ const {username} = useParams();
  let [whatsHappening, setWhatsHappening] = useState('');
+ let [userRating, setUserRating] = useState(1);
   const dispatch = useDispatch();
  const reviewClickHandler = () => {
     const newReview = {
-      review: whatsHappening
+      review: whatsHappening,
+      rating: userRating,
+      reviewer: username,
+      profilePic: "https://wallpapers.com/images/hd/aesthetic-profile-picture-pjnvodm0tj798j1q.jpg",
     }
     dispatch(createReview(newReview));
    console.log(whatsHappening);
@@ -24,6 +31,14 @@ const WhatsHappening = () => {
                className="form-control border-0"
                onChange={(event) => setWhatsHappening(event.target.value)}>
        </textarea>
+
+       <select>
+          <option value={userRating} onChange={(event) => setUserRating(1)}>1</option>
+          <option value={userRating} onChange={(event) => setUserRating(2)}>2</option>
+          <option value={userRating} onChange={(event) => setUserRating(3)}>3</option>
+          <option value={userRating} onChange={(event) => setUserRating(4)}>4</option>
+          <option value={userRating} onChange={(event) => setUserRating(5)}>5</option>
+       </select>
        <div>
          <button className="rounded-pill btn btn-primary float-end mt-2 ps-3 pe-3 fw-bold"
                  onClick={reviewClickHandler}>
