@@ -11,6 +11,9 @@ import store from "./reducers/store";
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import CurrentUserContext from "./reducers/current-user-context";
 import React from "react";
+import YelpSearchScreen from "./yelp/yelp-search";
+import YelpRestaurantDetails from "./yelp/yelp-restaurant-details";
+import Home from "./home";
 
 function App() {
   return (
@@ -21,7 +24,7 @@ function App() {
 
               <div className={"row ms-2 mt-2"}>
                 <div className={"col-2 col-md-2 col-lg-2 col-xl-2 ms-2 list-group "}>
-                  <Link to="/" className={"list-group-item"}><i
+                  <Link to="/home" className={"list-group-item"}><i
                       className="bi bi-house-fill"></i> Home</Link>
                   <Link to="profile" className={"list-group-item"}><i
                       className="bi bi-person-fill "></i> Profile</Link>
@@ -41,6 +44,17 @@ function App() {
                     <Route path="/login" element={<LoginComponent/>}/>
                     <Route path="/profile/:username"
                            element={<PersonalProfileComponent/>}/>
+                    <Route path="/home"
+                           element={<Home/>}/>
+                    <Route
+                        path="/yelp/restaurant/:id"
+                        element={<YelpRestaurantDetails/>}
+                    />
+                    <Route path="/yelp/search" element={<YelpSearchScreen/>} />
+                    <Route
+                        path="/yelp/search/:searchTerm"
+                        element={<YelpSearchScreen/>}
+                    />
                   </Routes>
                 </div>
               </div>
