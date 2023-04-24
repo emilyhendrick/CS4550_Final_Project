@@ -1,55 +1,96 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import WhatsHappening from "./whats-happening";
 
-import {Link}
+import {Link, useNavigate, useParams}
   from "react-router-dom";
-  import NavigationSidebar
-    from "../navigationSidebar";
+import NavigationSidebar
+  from "../navigationSidebar";
 
 import ReviewList from "./review-list";
 import ReviewItem
   from "./review-item";
 import reviewReducer from "./review-reducer";
 
-  import { configureStore }
-    from '@reduxjs/toolkit';
-  import {Provider} from "react-redux";
-  const store = configureStore(
+import {configureStore}
+  from '@reduxjs/toolkit';
+import {Provider, useDispatch, useSelector} from "react-redux";
+import {
+  findReviewsByRestaurant,
+  findReviewsByUsername,
+  findUserByRestaurantName
+} from "../services/users-service";
+import {logoutThunk, profileThunk} from "../services/user-thunks";
+import * as userService from "../services/users-service";
+import ProfileReviewItem from "../profile/reviewerProfile/profile-review-item";
+
+const store = configureStore(
     {reducer: {reviews: reviewReducer}});
 
 const RestaurantComponent = () => {
- return(
+  const {username} = useParams();
+  const {currentUser} = useSelector((state) => state.users);
+  const [profile, setProfile] = useState({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const searchTerm = username;
+  const [searchResults, setSearchResults] = useState([]);
+  const searchForReviews = async () => {
+    const results = await findReviewsByRestaurant(searchTerm);
+    setSearchResults(results);
+    console.log(searchResults);
+  };
+  useEffect(() => {
+    if (searchTerm) {
+      searchForReviews();
+    }
+  }, [searchTerm, searchResults]);
+
+  const getProfile = async () => {
+    const action = await dispatch(profileThunk());
+    console.log(action);
+    setProfile(action.payload);
+  };
+  const getUserByUsername = async () => {
+    const user = await userService.findUserByRestaurantName(username);
+    console.log(user);
+    setProfile(user);
+  };
+
+  useEffect(() => {
+    if (username) {
+      getUserByUsername();
+    } else {
+      getProfile();
+    }
+  }, []);
+  console.log(username);
+  console.log(profile);
+
+  return (
       <Provider store={store}>
-          <div>
-          <div className="row mt-2">
-            <div className="col-2 col-md-2 col-lg-1 col-xl-2">
-              <NavigationSidebar active="home"/>
-            </div>
-            <div className="col-8 col-md-8 col-lg-9 col-xl-10"
-                 style={{"position": "relative"}}>
-                      <div className="position-relative mb-2">
-                        <img src="/images/longhorn.jpg" className="w-100"/>
-                        <h1 className="position-absolute wd-nudge-up text-white">
-                          Longhorn Steakhouse</h1>
-                      </div>
-<ul className="list-group">
- <li className="list-group-item">
-   <div className="row">
-     <div className="col-auto">
-     </div>
-     <i className="col-3">Name: longhorn steakhouse</i>
-     <i className="col-4">Location: 39 walkers brook MA 01867</i>
-      </div>
-          <i className="col-auto">hello this text area is the restaurant summary text this will describe the food and any other relevant resturant info like signature dishes etc.</i>
-        </li>
-        </ul>
-            <WhatsHappening/>
-            <ReviewList/>
+        <div>
+          <div className="mt-2">
+            <div style={{"position": "relative"}}>
+              <div className="position-relative mb-2">
+                <img src={profile.profilePic} className="w-100"/>
+              </div>
+                <h3 className="mt-1 mb-1"><strong>{profile.businessName}</strong></h3>
+                <p className="mb-1" style={{color: "grey"}}>{profile.businessAddress}</p>
+              <p className="mb-4">hello this text area is the restaurant
+                summary text this will describe the food and any other
+                relevant resturant info like signature dishes etc.</p>
+              <hr style={{borderColor: "grey"}}/>
+              {currentUser && (
+                  <WhatsHappening/>
+              )}
+              {searchResults.map(result => (
+                  <ReviewItem key={result._id} review={result}/>
+              ))}
             </div>
           </div>
-          </div>
+        </div>
       </Provider>
 
- );
+  );
 };
 export default RestaurantComponent;

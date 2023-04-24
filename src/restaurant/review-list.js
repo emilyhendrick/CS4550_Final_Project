@@ -6,6 +6,7 @@ import ReviewItem
 
 const ReviewList = () => {
  const reviewsArray = useSelector(state => state.reviews);
+
  return(
    <ul className="list-group">
      {

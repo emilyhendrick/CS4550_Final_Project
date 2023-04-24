@@ -1,16 +1,32 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import * as userService from "../../services/users-service";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutThunk, profileThunk} from "../../services/user-thunks";
+import {findReviewsByUsername} from "../../services/users-service";
+import ReviewItem from "../../restaurant/review-item";
+import ProfileReviewItem from "./profile-review-item";
+import LoginComponent from "../../login";
 
 const PersonalProfileComponent = () => {
   const {username} = useParams();
   const {currentUser} = useSelector((state) => state.users);
   const [profile, setProfile] = useState({});
-  const [reviews, setReviews] = useState([]);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const searchTerm = profile.username;
+  const [searchResults, setSearchResults] = useState([]);
+  const searchForReviews = async () => {
+    const results = await findReviewsByUsername(searchTerm);
+    setSearchResults(results);
+    console.log(searchResults);
+  };
+  useEffect(() => {
+    if (searchTerm) {
+      searchForReviews();
+    }
+  }, [searchTerm, searchResults]);
+
   const getProfile = async () => {
     const action = await dispatch(profileThunk());
     console.log(action);
@@ -37,10 +53,6 @@ const PersonalProfileComponent = () => {
       getProfile();
     }
   }, []);
-  console.log(username);
-  console.log(currentUser);
-  console.log(profile);
-  // console.log(profile.username);
 
   return (
       <div className={"row"}>
@@ -54,7 +66,7 @@ const PersonalProfileComponent = () => {
                    style={{border: "1px solid LightGrey", borderRadius: 5}}>
                 <div className={"m-2"}>
                   <p className={"fw-bold"}>Basic Info</p>
-                  {profile && (
+                  {(currentUser.userRole === 'Personal') && (
                       <div>
                         <label>Profile Picture</label>
                         {currentUser && (
@@ -123,6 +135,56 @@ const PersonalProfileComponent = () => {
                         )}
                       </div>
                   )}
+                  {(currentUser.userRole === 'Business') && (
+                      <div>
+                        <label>Profile Picture</label> <br/>
+                        <img src={profile.profilePic}
+                             className="rounded-circle mb-3 me-2"
+                             width="64px" height="64px"
+                             alt={"profile picture"}/>
+                        <input
+                            type="file"
+                            className="form-control"
+                            onChange={(e) => {
+                              setProfile(
+                                  {
+                                    ...profile,
+                                    profilePic: e.target.value
+                                  })
+                              userService.updateUser(profile);
+                            }
+                            }
+                        />
+                        <br/>
+                        <label>Business Name</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={profile.businessName}
+                            onChange={(e) => {
+                              setProfile(
+                                  {...profile, businessName: e.target.value});
+                              userService.updateUser(profile);
+                            }
+                            }
+                        />
+                        <label>Business Address</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={profile.businessAddress}
+                            onChange={(e) => {
+                              setProfile(
+                                  {
+                                    ...profile,
+                                    businessAddress: e.target.value
+                                  });
+                              userService.updateUser(profile);
+                            }
+                            }
+                        />
+                      </div>
+                  )}
                 </div>
               </div>
               <div style={{border: "1px solid LightGrey", borderRadius: 5}}>
@@ -178,16 +240,57 @@ const PersonalProfileComponent = () => {
             </div>)}
         {username && (
             <div>
-              <img src={profile.profilePic}
-                   className="rounded-circle mb-3 me-2"
-                   width="64px" height="64px"
-                   alt={"profile picture"}/>
-              <h2>{profile.firstName} {profile.lastName}</h2>
-              <p>@{profile.username}</p>
-              <hr/>
-              <p>{profile.firstName} {profile.lastName}'s Reviews</p>
+              {(profile.userRole === 'Personal') && (
+                  <div>
+                    <img src={profile.profilePic}
+                         className="rounded-circle mb-3 me-2"
+                         width="64px" height="64px"
+                         alt={"profile picture"}/>
+                    <h2>{profile.firstName} {profile.lastName}</h2>
+                    <p>@{profile.username}</p>
+                    <hr/>
+                    <p>{profile.firstName} {profile.lastName}'s Reviews</p>
+                    {searchResults.map(result => (
+                        <ProfileReviewItem key={result._id} review={result}/>
+                    ))}
+                  </div>
+              )
+              }
+              {(profile.userRole === 'Business') && (
+                  <div>
+                    <img src={profile.profilePic}
+                         className="rounded-circle mb-3 me-2"
+                         width="64px" height="64px"
+                         alt={"profile picture"}/>
+                    <h2>{profile.businessName}</h2>
+                    <p>{profile.businessAddress}</p>
+                    <hr/>
+                    <p>Reviews of {profile.businessName}</p>
+                    {searchResults.map((result) => (
+                              <h2>{result.title}</h2>
+                      ))}
+                    {() => (console.log(searchResults))}
+                    <div className="table-responsive">
+                      <table className="table">
+                        <tbody>
+                        <tr>
+                          {searchResults.map((result) => {
+                            console.log(result);
+                            return (
+                                <td>
+                                    <h2>{result.title}</h2>
+                                </td>
+                            );
+                          })}
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+              )}
             </div>
         )}
+        {!currentUser && (<LoginComponent/>)}
       </div>
   );
 };

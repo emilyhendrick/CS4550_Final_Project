@@ -5,13 +5,14 @@ import "./signup.css";
 
 function SignUpComponent() {
   const [user, setUser] = useState({
-    username: "alice",
+    username: "alice22",
     password: "alice",
     firstName: "Alice",
     lastName: "Wonderland",
     email: "alice123@gmail.com",
     profilePic: "",
     createdOn: Date.now,
+    userRole: "Personal",
   });
   const navigate = useNavigate();
   const register = async () => {
@@ -20,6 +21,7 @@ function SignUpComponent() {
   };
 return(
 <>
+<form>
   <div className="container">
     <h1>Sign Up</h1>
     <p>Please fill in this form to create an account.</p>
@@ -40,11 +42,22 @@ return(
 
     <label for="psw"><b>Password</b></label>
     <input type="password" className="form-control" placeholder="Enter Password" name="psw"   value={user.password}
-                                                                                                     onChange={(e) => setUser({ ...user, password: e.target.value })} required/>
+                                                                                                  onChange={(e) => setUser({ ...user, password: e.target.value })} required/>
+
+
+<input type="radio" value="Personal"
+      name="radio-role" id="radio-personal" onChange={(e) => setUser({ ...user, userRole: e.target.value })} required/>
+<label for="radio-personal">Personal</label><br/>
+<input type="radio" value="Business"
+      name="radio-role" id="radio-business" onChange={(e) => setUser({ ...user, userRole: e.target.value })} required/>
+<label for="radio-business">Business</label><br/>
+
+<br/>
 
     <label>
       <input type="checkbox" checked="checked" name="remember" style={{marginBottom: "15px"}}/> Remember me
     </label>
+
 
     <p>By creating an account you agree to our <a href="#" style={{color: "dodgerblue"}}>Terms & Privacy</a>.</p>
 
@@ -54,6 +67,7 @@ return(
     </div>
 
   </div>
+  </form>
 </>
 );
 

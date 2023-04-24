@@ -1,5 +1,7 @@
 import axios from "axios";
 const USERS_REST_API_URL = "http://localhost:4000/api/users";
+const REVIEWS_REST_API_URL = "http://localhost:4000/api/reviews";
+
 
 const api = axios.create({
   withCredentials: true,
@@ -52,5 +54,28 @@ export const profile = async () => {
 
 export const findUserByUsername = async (username) => {
   const response = await api.get(`${USERS_REST_API_URL}/username/${username}`);
+  return response.data;
+};
+
+export const findUserByRestaurantName = async (name) => {
+  const response = await api.get(`${USERS_REST_API_URL}/restaurant/${name}`);
+  return response.data;
+};
+
+export const findReviewsByUsername = async (query) => {
+  const response = await axios.get(
+      `${REVIEWS_REST_API_URL}/username/${query}`
+  );
+  console.log("query: " + query)
+  console.log(`${REVIEWS_REST_API_URL}/username/${query}`);
+  return response.data;
+};
+
+export const findReviewsByRestaurant = async (query) => {
+  const response = await axios.get(
+      `${REVIEWS_REST_API_URL}/restaurant/${query}`
+  );
+  console.log("query: " + query)
+  console.log(`${REVIEWS_REST_API_URL}/restaurant/${query}`);
   return response.data;
 };

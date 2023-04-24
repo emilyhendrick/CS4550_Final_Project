@@ -1,20 +1,15 @@
-import {useDispatch} from "react-redux";
+import {Provider, useDispatch} from "react-redux";
 import React from "react";
-import './review.css';
-
-import ReviewStat from "./review-stats";
-
-import {deleteReview, createReview}
-  from "./review-reducer";
 import {Link} from "react-router-dom";
+import store from "../../reducers/store";
 
-const ReviewItem = (
+const ProfileReviewItem = (
     {
       review = {
         reviewer: {type: String, required: true},
         reviewId: {type: String, required: true, unique: true},
         review: {type: String, required: true},
-        rating:   {type: Number},
+        rating: {type: Number},
         createdOn: {type: Date, default: Date.now},
         profilePic: {type: String},
         restaurantName: {type: String, required: true}
@@ -23,7 +18,7 @@ const ReviewItem = (
 
   const dispatch = useDispatch();
   const deleteReviewHandler = (id) => {
-    dispatch(deleteReview(id));
+    // dispatch(deleteReview(id));
   }
 
   const reviewStars = () => {
@@ -79,34 +74,24 @@ const ReviewItem = (
       );
     }
   }
-
   return (
-      <div className="list-group-item">
+      <Provider store={store}>
         <div className="list-group-item mb-2"
              style={{border: "1px solid LightGrey", borderRadius: 5}}>
           <div className={"m-3"}>
-            <div className="d-inline-block justify-content-center">
-              <div className={"d-inline-block"}>
-                <img src={review.profilePic}
-                     className="rounded-circle mb-3 me-2"
-                     width="64px" height="64px"
-                     style={{width: "64px", height: "64px" }}
-                     alt={"profile picture"}/>
-              </div>
-              <div className={"d-inline-block"}>
-                <Link className={"pb-0 mb-0"}
-                      to={`/profile/${review.reviewer}`} style={{
-                  color: "dodgerblue",
-                  textDecoration: "none"
-                }}><strong>@{review.reviewer}</strong></Link>
-                <p className="pb-0 mb-2">{review.createdOn}</p>
-              </div>
+            <div className="row">
+              <Link className={"col pb-0 mb-2"}
+                    to={`/restaurant/${review.restaurantName}`} style={{
+                color: "dodgerblue",
+                textDecoration: "none"
+              }}><strong>{review.restaurantName}</strong></Link>
+              <p className="col text-end pb-0 mb-2">{review.createdOn}</p>
             </div>
             {reviewStars()}
             <p className={"pb-0 mt-2"}>{review.review}</p>
           </div>
         </div>
-      </div>
+      </Provider>
   )
 }
-export default ReviewItem;
+export default ProfileReviewItem;
