@@ -1,18 +1,19 @@
 import './App.css';
-import ProfileComponent from './profile/reviewerProfile/personal-profile'
-import NavigationSidebar from "./navigationSidebar";
+// import ProfileComponent from './profile/reviewerProfile/personal-profile'
+// import NavigationSidebar from "./navigationSidebar";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import BusinessProfileComponent
-  from "./profile/businessProfile/businessProfile";
-import PersonalProfileComponent
-  from "./profile/reviewerProfile/personal-profile";
-import LoginComponent from "./login/index";
-import SignUpComponent from "./signup/index";
+// import BusinessProfileComponent
+//   from "./profile/businessProfile/businessProfile";
+// import PersonalProfileComponent
+//   from "./profile/reviewerProfile/personal-profile";
+// import LoginComponent from "./login/index";
+// import SignUpComponent from "./signup/index";
 import RestaurantComponent from "./restaurant/index";
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
 import Home from "./home";
 import ResultSummaryList from "./home/results";
+
 
 
 function App() {
@@ -36,3 +37,5 @@ function App() {
 
 
 export default App;
+
+

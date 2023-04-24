@@ -2,6 +2,7 @@ import React from "react";
 import ExploreComponent from "./explore";
 import NavigationSidebar from "./navigation-sidebar";
 
+
 function Home() {
     return (
         <div className="row mt-2">
@@ -13,7 +14,9 @@ function Home() {
 
                 <ExploreComponent/>
 
+
             </div>
+            <br/>
             {/*<div className="d-sm-none d-md-none d-lg-block col-lg-4 col-xl-4">*/}
             {/*</div>*/}
         </div>
