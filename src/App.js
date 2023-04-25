@@ -22,21 +22,11 @@ function App() {
           <CurrentUserContext>
             <BrowserRouter>
 
-              <div className={"row ms-2 mt-2"}>
-                <div className={"col-2 col-md-2 col-lg-2 col-xl-2 ms-2 list-group "}>
-                  <Link to="/home" className={"list-group-item"}><i
-                      className="bi bi-house-fill"></i> Home</Link>
-                  <Link to="profile" className={"list-group-item"}><i
-                      className="bi bi-person-fill "></i> Profile</Link>
-                  <Link to="register"
-                        className={"list-group-item"}><i
-                      className="bi bi-patch-plus-fill "></i> Register</Link>
-                  <Link to="login" className={"list-group-item"}><i
-                      className="bi bi-door-open-fill "></i> Login</Link>
-                </div>
-                <div className={"col ms-2 me-2"} style={{"position": "relative"}}>
+              <div className={"row ms-4 me-4 mt-2"}>
+                <NavigationSidebar/>
+                <div className={"col ms-2"} style={{"position": "relative"}}>
                   <Routes>
-                    <Route path="/" element={<LoginComponent/>}/>
+                    <Route path="/" element={<Home/>}/>
                     <Route path="/restaurant/:username" element={<RestaurantComponent/>}/>
                     <Route path="/register" element={<SignUpComponent/>}/>
                     <Route path="/profile"
