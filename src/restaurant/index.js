@@ -80,7 +80,7 @@ const RestaurantComponent = () => {
                 <p className="mb-1" style={{color: "grey"}}>{profile.businessAddress}</p>
               <p className="mb-4">hello this text area is the restaurant
                 summary text this will describe the food and any other
-                relevant resturant info like signature dishes etc.</p>
+                relevant restaurant info like signature dishes etc.</p>
               <hr style={{borderColor: "grey"}}/>
               {currentUser && (
                   <WhatsHappening/>

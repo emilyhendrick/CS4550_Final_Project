@@ -1,11 +1,10 @@
 import React, {useState} from "react";
-
 import {createReview} from "./review-reducer";
 import {useDispatch} from "react-redux";
 import {Link, useNavigate, useParams}
   from "react-router-dom";
 import * as reviewService from "../services/review-service";
-import {createReviews} from "../services/review-thunk";
+import {createReviewThunk} from "../services/review-thunk";
 
 const WhatsHappening = () => {
  const {username} = useParams();
@@ -19,7 +18,7 @@ const WhatsHappening = () => {
       reviewer: username,
       profilePic: "https://wallpapers.com/images/hd/aesthetic-profile-picture-pjnvodm0tj798j1q.jpg",
     }
-    //dispatch(createReview(newReview));
+    dispatch(createReview(newReview));
     await reviewService.createReview(newReview);
    console.log(whatsHappening);
  }
