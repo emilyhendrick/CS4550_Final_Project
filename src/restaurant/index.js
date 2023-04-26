@@ -35,6 +35,7 @@ const RestaurantComponent = () => {
   const navigate = useNavigate();
   const searchTerm = username;
   const [searchResults, setSearchResults] = useState([]);
+
   const searchForReviews = async () => {
     const results = await findReviewsByRestaurant(searchTerm);
     setSearchResults(results);
