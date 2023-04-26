@@ -38,6 +38,25 @@ const WhatsHappening = () => {
    console.log(whatsHappening);
  }
 
+  const getProfile = async () => {
+    const action = await dispatch(profileThunk());
+    console.log(action);
+    setProfile(action.payload);
+  };
+  const getUserByUsername = async () => {
+    const user = await userService.findUserByUsername(username);
+    console.log(user);
+    setProfile(user);
+  };
+
+  useEffect(() => {
+    if (username) {
+      getUserByUsername();
+    } else {
+      getProfile();
+    }
+  }, []);
+
 
  return (
  <>
