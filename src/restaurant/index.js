@@ -23,6 +23,7 @@ import {logoutThunk, profileThunk} from "../services/user-thunks";
 import * as userService from "../services/users-service";
 import ProfileReviewItem from "../profile/reviewerProfile/profile-review-item";
 
+
 const store = configureStore(
     {reducer: {reviews: reviewReducer}});
 
@@ -55,6 +56,7 @@ const RestaurantComponent = () => {
     console.log(user);
     setProfile(user);
   };
+
 
   useEffect(() => {
     if (username) {

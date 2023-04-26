@@ -4,20 +4,23 @@ import {createReview} from "./review-reducer";
 import {useDispatch} from "react-redux";
 import {Link, useNavigate, useParams}
   from "react-router-dom";
+import * as reviewService from "../services/review-service";
+import {createReviews} from "../services/review-thunk";
 
 const WhatsHappening = () => {
  const {username} = useParams();
  let [whatsHappening, setWhatsHappening] = useState('');
  let [userRating, setUserRating] = useState(1);
   const dispatch = useDispatch();
- const reviewClickHandler = () => {
+ const reviewClickHandler = async () => {
     const newReview = {
       review: whatsHappening,
       rating: userRating,
       reviewer: username,
       profilePic: "https://wallpapers.com/images/hd/aesthetic-profile-picture-pjnvodm0tj798j1q.jpg",
     }
-    dispatch(createReview(newReview));
+    //dispatch(createReview(newReview));
+    await reviewService.createReview(newReview);
    console.log(whatsHappening);
  }
 
