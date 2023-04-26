@@ -25,16 +25,8 @@ const WhatsHappening = () => {
 
 
  const reviewClickHandler = async () => {
-    const newReview = {
-      review: whatsHappening,
-      rating: userRating,
-      reviewer: profile.username,
-      profilePic: "https://wallpapers.com/images/hd/aesthetic-profile-picture-pjnvodm0tj798j1q.jpg",
-      createdOn: Date.now(),
-      restaurantName: "Thorntons",
-    }
-    dispatch(createReview(review));
-    await reviewService.createReview(review);
+   dispatch(createReview(review));
+   await reviewService.createReview(review);
    console.log(whatsHappening);
  }
 
