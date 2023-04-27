@@ -8,13 +8,12 @@ const currentUser = {
 };
 
 const templateReview = {
- ...currentUser,
- "topic": "Space",
- "time": "2h",
- "liked": false,
- "replies": 0,
- "retuits": 0,
- "likes": 0,
+ "reviewer": "testUser",
+ "reviewId": new Date().getTime(),
+ "review": "this is a template review",
+ "rating": 1,
+ "profilePic": "https://wallpapers.com/images/hd/aesthetic-profile-picture-pjnvodm0tj798j1q.jpg",
+ "restaurantName": "Pho Basil",
 }
 
 
@@ -35,16 +34,6 @@ const reviewSlice = createSlice({
         ...templateReview,
         _id: (new Date()).getTime(),
       })
-    },
-    toggleLike(state, action) {
-     const review = state.find((review) =>
-           review._id === action.payload._id);
-             review.liked = !review.liked;
-             if(review.liked) {
-                 review.likes = review.likes + 1;
-             } else {
-             review.likes = review.likes - 1;
-             }
     }
   }
  });
