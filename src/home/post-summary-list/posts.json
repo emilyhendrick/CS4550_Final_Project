@@ -1,11 +1,11 @@
-[{ "_id": 123, "topic": "Pho Basil", "userName": "@kevin",
-  "title": "Went there last friday and had a great experience. The food was tasteful and the service was fast.",
-  "time": "4/5 Stars",   "image": "phobasil.jpeg" },
-  { "_id": 234, "topic": "Eataly",   "userName": "@vincenzo",
-    "title": "Too expensive and portion are quite small. The bruschetta taste are just ok. If you're passing by this area, you can try but it's just not the place to come back.",
-    "time": "1/5 Stars",   "image": "eataly.jpeg" },
-  { "_id": 345, "topic": "sweetgreen",  "userName": "@john",
-    "title": "Got this catered for lunch on a work trip . Not my normal place I would eat but it definitely open my eyes to new healthier types of food I will eat . I got the hot honey chicken plate. The quality of the food is very good, and ton of flavor . You could tell the food was prepped with care and they even took the time to make it look nice . Definitely try it if you've been thinking about it .",
-    "time": "5/5 Stars",   "image": "sweetgreen.jpeg" }
+[{ "_id": 123, "restaurantName": "Pho Basil", "reviewer": "kevin", "createdOn" : "4/25/23",
+  "review": "Went there last friday and had a great experience. The food was tasteful and the service was fast.",
+  "rating": 4,   "profilePic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMGJQXYDZbgG2rI9VeockZKpcuw_kfjs0ZeQ&usqp=CAU" },
+  { "_id": 234, "restaurantName": "Eataly",   "reviewer": "baby_yoda", "createdOn" : "4/23/23",
+    "review": "Too expensive and portion are quite small. The bruschetta taste are just ok. If you're passing by this area, you can try but it's just not the place to come back.",
+    "rating": 1,   "profilePic": "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" },
+  { "_id": 345, "restaurantName": "sweetgreen",  "reviewer": "localGal404", "createdOn" : "4/22/23",
+    "review": "Got this catered for lunch on a work trip . Not my normal place I would eat but it definitely open my eyes to new healthier types of food I will eat . I got the hot honey chicken plate. The quality of the food is very good, and ton of flavor . You could tell the food was prepped with care and they even took the time to make it look nice . Definitely try it if you've been thinking about it .",
+    "rating": 5,   "profilePic": "https://i.pinimg.com/474x/85/5b/2b/855b2b606c64c961da2922a240a43236.jpg" }
 ]
 

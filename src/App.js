@@ -24,7 +24,7 @@ function App() {
 
               <div className={"row ms-4 me-4 mt-2"}>
                 <NavigationSidebar/>
-                <div className={"col ms-2"} style={{"position": "relative"}}>
+                <div className={"col-9 col-md-9 col-lg-9 col-xl-9 ms-2"} style={{"position": "relative"}}>
                   <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/restaurant/:username" element={<RestaurantComponent/>}/>

@@ -51,7 +51,7 @@ function YelpSearchScreen() {
                                 return (
                                     <td>
                                         <Link to={`/yelp/restaurant/${result.id}`}>
-                                            <img src={result.image_url} />
+                                            <img src={result.image_url} height={"400px"} />
                                             <br />
                                             <h2>{result.name}</h2>
                                         </Link>

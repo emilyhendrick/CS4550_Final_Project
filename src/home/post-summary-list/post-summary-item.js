@@ -1,22 +1,112 @@
 import React from "react";
+import {useDispatch} from "react-redux";
+import {deleteReview} from "../../restaurant/review-reducer";
+import {Link} from "react-router-dom";
 const PostSummaryItem = (
     {
-        post
+      review = {
+        reviewer: {type: String, required: true},
+        reviewId: {type: String, required: true, unique: true},
+        review: {type: String, required: true},
+        rating:   {type: Number},
+        createdOn: {type: Date, default: Date.now},
+        profilePic: {type: String},
+        restaurantName: {type: String, required: true}
+      }
+    }) => {
+
+  const dispatch = useDispatch();
+  const deleteReviewHandler = (id) => {
+    dispatch(deleteReview(id));
+  }
+
+  const reviewStars = () => {
+    if (review.rating.valueOf() === 1) {
+      return (
+          <div>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+          </div>
+      );
+    } else if (review.rating.valueOf() === 2) {
+      return (
+          <div>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+          </div>
+      );
+    } else if (review.rating.valueOf() === 3) {
+      return (
+          <div>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+          </div>
+      );
+    } else if (review.rating.valueOf() === 4) {
+      return (
+          <div>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star"></i>
+          </div>
+      );
+    } else if (review.rating.valueOf() === 5) {
+      return (
+          <div>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+            <i className="col-1 noPadding bi bi-star-fill"></i>
+          </div>
+      );
     }
-) => {
-    return(
-        <li className="list-group-item">
-            <div className="row">
-                <div className="col-10">
-                    <div>{post.userName} | {post.time}</div>
-                    <div className="fw-bolder" align="center">{post.topic}</div>
-                    <div>{post.title}</div>
-                </div>
-                <div className="col-2">
-                    <img width={70} className="float-end rounded-3" src={`/images/${post.image}`} alt={'tesla'}/>
-                </div>
+  }
+
+  return (
+      <div className="list-group-item">
+        <div className="list-group-item mb-2"
+             style={{border: "1px solid LightGrey", borderRadius: 5}}>
+          <div className={"m-3"}>
+            <div className="d-inline-block justify-content-center">
+              <div className={"d-inline-block"}>
+                <img src={review.profilePic}
+                     className="rounded-circle mb-3 me-2"
+                     width="64px" height="64px"
+                     style={{width: "64px", height: "64px", objectFit: "cover" }}
+                     alt={"profile picture"}/>
+              </div>
+              <div className={"d-inline-block"}>
+                <Link className={"pb-0 mb-0"}
+                      to={`/profile/${review.reviewer}`} style={{
+                  color: "dodgerblue",
+                  textDecoration: "none"
+                }}><strong>@{review.reviewer}</strong></Link>
+                <p className="pb-0 mb-2">{review.createdOn}</p>
+              </div>
             </div>
-        </li>
+            <br/>
+            <Link className={"pb-0 mb-0"}
+                  to={`/restaurant/${review.restaurantName}`} style={{
+              color: "dodgerblue",
+              textDecoration: "none"
+            }}><strong>{review.restaurantName}</strong></Link>
+            {reviewStars()}
+            <p className={"pb-0 mt-2"}>{review.review}</p>
+          </div>
+        </div>
+      </div>
     );
 };
 export default PostSummaryItem;

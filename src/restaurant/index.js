@@ -75,13 +75,10 @@ const RestaurantComponent = () => {
           <div className="mt-2">
             <div style={{"position": "relative"}}>
               <div className="position-relative mb-2">
-                <img src={profile.profilePic} className="w-100"/>
+                <img src={profile.profilePic} className="w-100" height={"500px"} style={{objectFit : "cover"}}/>
               </div>
                 <h3 className="mt-1 mb-1"><strong>{profile.businessName}</strong></h3>
                 <p className="mb-1" style={{color: "grey"}}>{profile.businessAddress}</p>
-              <p className="mb-4">hello this text area is the restaurant
-                summary text this will describe the food and any other
-                relevant restaurant info like signature dishes etc.</p>
               <hr style={{borderColor: "grey"}}/>
               {currentUser && (
                   <WhatsHappening/>
