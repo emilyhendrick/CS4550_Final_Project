@@ -20,11 +20,14 @@ function YelpRestaurantDetails() {
         <div>
             {restaurant && (
                 <div>
+                    <img src={restaurant.image_url} alt={restaurant.name} className="w-100" height={"500px"} style={{objectFit : "cover"}} />
                     <h1>{restaurant.name}</h1>
                     <p>Rating: {restaurant.rating}</p>
                     <p>Phone: {restaurant.phone}</p>
                     <p>Address: {restaurant.location.display_address.join(", ")}</p>
-                    <img src={restaurant.image_url} alt={restaurant.name} />
+                    <hr style={{borderColor: "grey"}}/>
+                    <p>No Reviews</p>
+
                 </div>
             )}
         </div>
