@@ -25,7 +25,6 @@ const WhatsHappening = () => {
 
 
  const reviewClickHandler = async () => {
-   setReview({...review, reviewer: profile.username});
    dispatch(createReview(review));
    await reviewService.createReview(review);
    console.log(whatsHappening);
@@ -57,7 +56,7 @@ const WhatsHappening = () => {
      <div className="col-11">
        <textarea value={review.review} placeholder="Leave A Review?"
                className="form-control border-0"
-               onChange={(event) => setReview({...review, review: event.target.value})}>
+               onChange={(event) => setReview({...review, review: event.target.value, reviewer: profile.username})}>
        </textarea>
        <h4>Rating:</h4>
         <div>
