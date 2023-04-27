@@ -25,6 +25,7 @@ const WhatsHappening = () => {
 
 
  const reviewClickHandler = async () => {
+   setReview({...review, reviewer: profile.username});
    dispatch(createReview(review));
    await reviewService.createReview(review);
    console.log(whatsHappening);
@@ -42,11 +43,7 @@ const WhatsHappening = () => {
   };
 
   useEffect(() => {
-    if (username) {
-      getUserByUsername();
-    } else {
       getProfile();
-    }
   }, []);
 
 
@@ -55,7 +52,7 @@ const WhatsHappening = () => {
  <form>
    <div className="row">
      <div className="col-auto">
-       <img src="/images/user.jpg" width={60}/>
+       <img src={profile.profilePic} width={60}/>
      </div>
      <div className="col-11">
        <textarea value={review.review} placeholder="Leave A Review?"
@@ -64,20 +61,20 @@ const WhatsHappening = () => {
        </textarea>
        <h4>Rating:</h4>
         <div>
-          <input type="radio" value="Personal"
+          <input type="radio" value={1}
                 name="radio-rating" id="radio-one" onChange={(e) => setReview({...review, rating: 1})} required/>
           <label for="radio-one">One</label><br/>
-          <input type="radio" value="Business"
+          <input type="radio" value={2}
                 name="radio-rating" id="radio-two" onChange={(e) => setReview({...review, rating: 2})} required/>
           <label for="radio-two">Two</label><br/>
 
-          <input type="radio" value="Personal"
+          <input type="radio" value={3}
                 name="radio-rating" id="radio-three" onChange={(e) => setReview({...review, rating: 3})} required/>
           <label for="radio-three">Three</label><br/>
-          <input type="radio" value="Business"
+          <input type="radio" value={4}
                 name="radio-rating" id="radio-four" onChange={(e) => setReview({...review, rating: 4})} required/>
           <label for="radio-four">Four</label><br/>
-          <input type="radio" value="Personal"
+          <input type="radio" value={5}
                 name="radio-rating" id="radio-five" onChange={(e) => setReview({...review, rating: 5})} required/>
           <label for="radio-five">Five</label><br/>
        </div>
